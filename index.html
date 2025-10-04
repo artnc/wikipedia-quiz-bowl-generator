@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wikipedia Quiz Bowl Generator</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: #333;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        margin: 0;
+        min-height: 100vh;
+        padding: 40px 20px;
+      }
+      h1 {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        color: #667eea;
+        font-size: 28px;
+        font-weight: 600;
+        margin: 0 auto 30px;
+        max-width: 900px;
+        padding: 20px 30px;
+        text-align: center;
+      }
+      .controls {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin: 0 auto 30px;
+        max-width: 900px;
+        padding: 25px 30px;
+      }
+      .control-group {
+        align-items: center;
+        display: flex;
+        gap: 10px;
+      }
+      button {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        color: white;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        padding: 10px 24px;
+        transition: all 0.2s;
+      }
+      button:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        transform: translateY(-2px);
+      }
+      button:active {
+        transform: translateY(0);
+      }
+      input {
+        font-size: 16px;
+        padding: 8px;
+        width: 300px;
+      }
+      label {
+        color: #555;
+        font-weight: 600;
+      }
+      .question {
+        animation: fadeIn 0.5s ease-in;
+        background: white;
+        border-left: 4px solid #667eea;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        line-height: 1.6;
+        margin: 0 auto 25px;
+        max-width: 900px;
+        padding: 25px 30px;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .question strong:first-child {
+        color: #667eea;
+        font-size: 14px;
+        text-transform: uppercase;
+      }
+      .question a {
+        color: #667eea;
+        text-decoration: none;
+      }
+      .question a:hover {
+        text-decoration: underline;
+      }
+      select {
+        background: white;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        color: #333;
+        cursor: pointer;
+        font-size: 16px;
+        padding: 8px 12px;
+        transition: border-color 0.2s;
+      }
+      select:focus {
+        border-color: #667eea;
+        outline: none;
+      }
+      select:hover {
+        border-color: #667eea;
+      }
+      #questions {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="controls">
+      <div class="control-group">
+        <label for="topic">Topic:</label>
+        <select id="topic">
+          <option value="All" selected>All</option>
+          <option value="Arts">Arts</option>
+          <option value="Biology and health sciences">Biology</option>
+          <option value="Everyday life">Everyday life</option>
+          <option value="Geography">Geography</option>
+          <option value="History">History</option>
+          <option value="Mathematics">Mathematics</option>
+          <option value="People">People</option>
+          <option value="Philosophy and religion">Philosophy</option>
+          <option value="Physical sciences">Physical sciences</option>
+          <option value="Society and social sciences">Society</option>
+          <option value="Technology">Technology</option>
+        </select>
+      </div>
+      <div class="control-group">
+        <label for="count">Quantity:</label>
+        <select id="count">
+          <option value="1">1</option>
+          <option value="5" selected>5</option>
+          <option value="20">20</option>
+        </select>
+      </div>
+      <div class="control-group">
+        <label for="difficulty">Difficulty:</label>
+        <select id="difficulty">
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4" selected>4</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+      <button id="generate">Generate</button>
+    </div>
+    <div id="questions"></div>
+    <script src="dist/app.js"></script>
+  </body>
+</html>

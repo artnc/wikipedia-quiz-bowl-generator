@@ -1,0 +1,6 @@
+# https://duo.fyi/pre-commit
+repos:
+  - repo: https://github.com/duolingo/pre-commit-hooks.git
+    rev: 1.11.1
+    hooks:
+      - id: duolingo
