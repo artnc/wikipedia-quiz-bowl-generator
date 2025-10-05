@@ -129,8 +129,27 @@
         border-color: #667eea;
       }
       #questions {
-        max-width: 900px;
         margin: 0 auto;
+        max-width: 900px;
+      }
+      .spinner {
+        align-self: center;
+        animation: spin 1s linear infinite;
+        border: 3px solid rgba(102, 126, 234, 0.3);
+        border-radius: 50%;
+        border-top-color: #667eea;
+        height: 24px;
+        opacity: 0;
+        transition: opacity 0.3s;
+        width: 24px;
+      }
+      .spinner.visible {
+        opacity: 1;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
       }
     </style>
   </head>
@@ -171,6 +190,7 @@
         </select>
       </div>
       <button id="generate">Create packet</button>
+      <div class="spinner" id="spinner"></div>
     </div>
     <div id="questions"></div>
     <script src="dist/app.js"></script>

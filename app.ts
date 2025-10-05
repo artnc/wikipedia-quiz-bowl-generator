@@ -225,6 +225,7 @@ let DEBUG_ANSWER: [string, string];
   const $difficulty = document.querySelector(
     "#difficulty",
   )! as HTMLSelectElement;
+  const $spinner = document.querySelector("#spinner")! as HTMLDivElement;
   const answers: Record<string, string[]>[] = await (
     await fetch("vital-articles.json")
   ).json();
@@ -232,6 +233,7 @@ let DEBUG_ANSWER: [string, string];
   // Load packet questions
   const seenAnswers = new Set<string>();
   const loadQuestions = async () => {
+    $spinner.classList.add("visible");
     const count = parseInt($count.value);
     $questions.innerHTML = "";
     const topicsAndAnswers = Object.entries(
@@ -242,6 +244,7 @@ let DEBUG_ANSWER: [string, string];
     if (topicsAndAnswers.length === 0) {
       $questions.innerHTML =
         '<div class="question error">No questions available for this topic and difficulty combination.</div>';
+      $spinner.classList.remove("visible");
       return;
     }
     let questionsGenerated = 0;
@@ -284,6 +287,7 @@ let DEBUG_ANSWER: [string, string];
       $questions.innerHTML =
         '<div class="question error">Unable to generate questions. Please try a different topic or difficulty level.</div>';
     }
+    $spinner.classList.remove("visible");
   };
   document.querySelector("#generate")!.addEventListener("click", loadQuestions);
 })();
