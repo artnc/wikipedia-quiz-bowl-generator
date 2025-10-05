@@ -239,6 +239,12 @@ let DEBUG_ANSWER: [string, string];
     )
       .filter(([topic]) => $topic.value === "All" || topic === $topic.value)
       .flatMap(([topic, answers]) => answers.map(a => [topic, a]));
+    if (topicsAndAnswers.length === 0) {
+      $questions.innerHTML =
+        '<div class="question error">No questions available for this topic and difficulty combination.</div>';
+      return;
+    }
+    let questionsGenerated = 0;
     for (let i = 0; i < (DEBUG_ANSWER ? 1 : count); i++) {
       for (let j = 0; j < (DEBUG_ANSWER ? 1 : 5); j++) {
         try {
@@ -267,11 +273,16 @@ let DEBUG_ANSWER: [string, string];
           questionDiv.className = "question";
           questionDiv.innerHTML = questionHtml;
           $questions.appendChild(questionDiv);
+          questionsGenerated++;
           break;
         } catch (ex) {
           console.warn((ex as Error).message);
         }
       }
+    }
+    if (questionsGenerated === 0) {
+      $questions.innerHTML =
+        '<div class="question error">Unable to generate questions. Please try a different topic or difficulty level.</div>';
     }
   };
   document.querySelector("#generate")!.addEventListener("click", loadQuestions);
