@@ -27,7 +27,9 @@ const generateQuestion = async (topic: string, answer: string) => {
   }
 
   // Ignore taxonomical names
-  if (/is a (phylum|class|order|family|genus|species)/.test(text)) {
+  if (
+    /is a (phylum|class|order|family|genus|species)/.test(text.slice(0, 100))
+  ) {
     throw new Error(`Found taxonomical name for ${answer}`);
   }
 
